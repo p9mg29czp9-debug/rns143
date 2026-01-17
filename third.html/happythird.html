@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Bebi Ace</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- GLOBAL STYLES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            font-family: 'Arial Black', Helvetica, sans-serif;
+            scroll-behavior: smooth; /* For smooth scrolling between sections */
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar a {
+            float: left;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #000;
+        }
+
+        .navbar .home-icon {
+            font-size: 1.5em;
+            margin-right: 5px;
+        }
+
+        /* --- HOME SECTION --- */
+        .header {
+            padding: 40px 20px;
+            text-align: center;
+            background-image: url(home\ image.jpg); /* Use your image path */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .header * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .envelope-container {
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .envelope-image {
+            width: 400px;
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .envelope-image:hover {
+            transform: scale(1.1);
+        }
+
+        #our-story {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 4;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url(Old\ Paper\ Background\ For\ Microsoft\ Word.jpg); /* Use your image path */
+            background-size: cover;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+            text-align: center;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* --- AUDIO FOR ENVELOPE --- */
+        #modalAudio {
+            display: none;
+        }
+
+        /* --- MUSIC SECTION --- */
+        #music {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .music-heading {
+            font-size: 2rem;
+            margin: 0 0 5px 0;
+        }
+
+        .music-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin: 0 0 30px 0;
+            font-weight: normal;
+        }
+
+        .music-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .music-card {
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .music-card:hover {
+            transform: scale(1.05);
+        }
+
+        .album-art {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .track-title {
+            font-size: 1.1rem;
+            margin: 0 0 5px 0;
+        }
+
+        .track-artist {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0 0 10px 0;
+        }
+
+        /* Style audio players consistently */
+        audio {
+            width: 200px;
+            outline: none;
+        }
+
+        /* --- LETTERS & GALLERY PLACEHOLDERS --- */
+        #letters, #gallery {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+
+        /* --- LETTERS SECTION (LAVENDER THEME) --- */
+        #letters {
+            padding: 40px 20px;
+            background-color: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .letters-heading {
+            font-size: 2rem;
+            text-align: center;
+            margin: 0 0 30px 0;
+            color: #9f7aea; /* Soft purple for heading */
+        }
+
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Empty Lavender Text Box Style */
+        .letter-card {
+            background-color: #e6d2f9; /* Lavender background */
+            border: 2px solid #d4b6f5; /* Slightly darker lavender border */
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 180px; /* Ensures boxes are tall enough for text */
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2d2d2d; /* Dark text for readability */
+            /* Optional: Add placeholder hint if needed */
+            /* placeholder: "Write your letter here..."; */
+        }
+
+  /* --- GALLERY SECTION - IMAGE GALLERY (EVEN SMALLER) --- */
+#gallery {
+    padding: 20px 10px; /* Further reduced padding */
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.gallery-heading {
+    font-size: 1.6rem; /* Further reduced font size */
+    color: #9f7aea;
+    margin: 0 0 20px 0; /* Further reduced margin */
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Further reduced minmax value */
+    gap: 10px; /* Further reduced gap */
+    max-width: 700px; /* Further reduced max-width */
+    margin: 0 auto;
+}
+
+.image-gallery a {
+    display: block;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Further reduced shadow */
+    border-radius: 3px; /* Further reduced border-radius */
+    overflow: hidden;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.image-gallery a:hover img {
+    transform: scale(1.03); /* Further reduced scale */
+}
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#home"><i class="fas fa-heart home-icon"></i>Home</a>
+        <a href="#music">Music</a>
+        <a href="#letters">Letters</a>
+        <a href="#gallery">Gallery</a>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home">
+        <header class="header">
+            <h1 class="header-title">To My Bebi, Ace</h1>
+            <h2 class="header-subtitle">Happy Third Monthsary • 01/18/26</h2>
+            <a href="#our-story" class="btn">See Our Story</a>
+        </header>
+
+        <div class="envelope-container" onclick="openModal(); playModalAudio();">
+            <img src="envelope-removebg-preview.png" alt="Open Letter" class="envelope-image"> <!-- Use your image path -->
+        </div>
+
+        <section id="our-story">
+            <p>This is the story of us—three months of laughter, love, and endless memories. Here’s to many more!</p>
+        </section>
+
+        <!-- MODAL FOR LETTER -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal(); pauseModalAudio();">&times;</span>
+                <p>My Bebi Ace,<br><br>Happy Third MotMot! This is just a small gesture to show you how much I deeply love you in every single day. These three months with you were the happiest months of my life and I know that many more months, years, and decades of love and happiness will come. Thank you for loving me wholeheartedly as I am, as I write this message, love fills up my heart. Thank you for never ending understanding and patience towards me, even if things are hard for you, you never made me feel like I was a burden. Thank you for all the efforts that you do to show me that you truly love me and care for me. Loving you was the best thing I have ever done and I will surely do it everyday for the rest of our lives. You were always the dream and until now, it feels unreal. Your love makes me live and I hope you know that your love is the only love I want and need. Every single time I look into your eyes, I see a bright future of us. And now, I am sure that I know love because I know YOU.</p>
+            </div>
+        </div>
+
+        <!-- AUDIO FOR MODAL -->
+        <audio id="modalAudio" src="Fitterkarma - Kalapastangan (Trend Lyrics Loop).mp4" preload="auto"> <!-- Use your MP3 path -->
+    </section>
+
+    <!-- MUSIC SECTION -->
+    <section id="music">
+        <h2 class="music-heading">Music</h2>
+        <p class="music-subtitle">These songs remind me of you.</p>
+
+        <div class="music-container">
+            <!-- TRACK 1 -->
+            <div class="music-card">
+                <img src="palagi art.jpg" alt="Palagi Album Art" class="album-art"> <!-- Use your image path -->
+                <h3 class="track-title">Palagi</h3>
+                <p class="track-artist">TJ Monterde</p>
+                <audio controls preload="none">
+                    <source src="PALAGI - TJ Monterde _ OFFICIAL LYRIC VIDEO.mp4" type="audio/mpeg"> <!-- Use your MP3 path -->
+                    Your browser does not support the audio element.
+                
+            </div>
+
+            <!-- TRACK 2 -->
+            <div class="music-card">
+                <img src="kalapastangan art.jpg" alt="kalapastangan" class="album-art">
+                <h3 class="track-title">Kalapastangan</h3>
+                <p class="track-artist">Fitterkarma</p>
+                <audio controls preload="none">
+                    <source src="Kalapastangan.mp4" type="audio/mpeg"> 
+                    Your browser does not support the audio element.
+                
+            </div>
+
+            <!-- TRACK 3 (ADD MORE AS NEEDED) -->
+            <div class="music-card">
+                <img src="your universe art.jpg" alt="your universe" class="album-art"> 
+                <h3 class="track-title">Your Universe</h3>
+                <p class="track-artist">Rico Blanco</p>
+                <audio controls preload="none">
+                    <source src="Your Universe (Acoustic).mp4" type="audio/mpeg"> 
+                    Your browser does not support the audio element.
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- LETTERS SECTION (PLACEHOLDER) -->
+    <section id="letters">
+        <h2>Letters</h2>
+        <p>More sweet messages for you will go here soon!</p>
+        <!-- LETTERS SECTION (EMPTY LAVENDER BOXES) -->
+    <section id="letters">
+        <h2 class="letters-heading">Letters For You</h2>
+
+        <div class="letters-grid">
+            <!-- LETTER BOX 1 -->
+            <div class="letter-card">
+                Hellooo my cutie bebi! My first message is about how sure I am about you. If sometimes you feel like I do not love you, I hope this message will assure you of how much I love you genuinely. I know you have been through a lot of pain you did not deserve. I know that even in some ways, you were scared to love, you were traumatized, and you were hurt. After everything that you have been through, I want you to know that I am here to love you the way you deserve to be treated from the start. I am here to prove that your heart is safe now, that you do not have to worry about getting hurt anymore. I will do everything and anything for you, for us.
+            </div>
+
+            <!-- LETTER BOX 2 -->
+            <div class="letter-card">
+                I love everything about you, My Universe. The way you smile, laugh, act, and really everything. Just seeing you smile makes me smile, by then I was really sure that you are the one. Hey bebi, I hope you will not say that you are chopped or ugly because you are not naman po. Bebi you are sososo pogi po kaya. You are the most handsome man I ever laid eyes on and you always captivate me. Bebi please do not feel insecure about yourself po kasi you are perfect just the way you are po. You are handsome and unique in your own special way po. Your eyes always brightens up my day in all ways. I love every part of you always and forever.
+            </div>
+
+            <!-- LETTER BOX 3 -->
+            <div class="letter-card">
+                You make me a better person, bebi ko. You made me choose to be better not just as a partner, but as a person. You are the reason why I do things with love and passion. You give me the strength to survive and push through all the hard times. You will always be my INSPIRATION in life. Thank you for always inspiring me to do my best in all the things that I do. For always believing in me when no one did, that means the whole world to me. I love you infinitely, Lebron Ace L. Ortiz.            </div>
+
+            <!-- LETTER BOX 4 -->
+            <div class="letter-card">
+                I hope that you achieve all your dreams. I hope you will always ignite the fire within you, my bebi, because you are capable of many amazing and beautiful things in life. I will always be praying for you.
+            </div>
+
+            <!-- LETTER BOX 5 -->
+            <div class="letter-card">
+                I hope that you will achieve your dreams of becoming an amazing chef one day, I have no doubts, bebi. I know you will do great and I know that you will be the best. Always trust and surrender everything to God.
+            </div>
+
+            <!-- LETTER BOX 6 -->
+            <div class="letter-card">
+                I hope you go pro in Basketball. I know you love that sport so much po and I am always praying for everything to go well for you. I believe in you, my bebi. I know you can do it. I will always be here to support you and I will always be cheering for you. I hope you know that I love all the things that makes you happy. YOU ARE MY FAVORITE PLAYERRRRR!!!
+            </div>
+
+        
+        </div>
+    </section>
+    </section>
+    
+
+    <!-- GALLERY SECTION (PLACEHOLDER) -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <p>Our favorite photos together will be here!</p>
+        <!-- GALLERY SECTION (HEART-SHAPED COLLAGE) -->
+<section id="gallery">
+    <h2 class="gallery-heading">Our Moments Together</h2>
+    <div class="image-gallery">
+        <a href="images/large/image1.jpg" data-lightbox="mygallery" data-title="Image 1 Title">
+            <img src="p1.jpg" alt="Image 1">
+        </a>
+        <a href="images/large/image2.jpg" data-lightbox="mygallery" data-title="Image 2 Title">
+            <img src="p2.jpg" alt="Image 2">
+        </a>
+        <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p3.jpg" alt="Image 3">
+        </a>
+         <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p4.jpg" alt="Image 3">
+        </a>
+         <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p5.jpg" alt="Image 3">
+        </a>
+         <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p6.jpg" alt="Image 3">
+             <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p7.jpg" alt="Image 3">
+        </a>
+         <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p8.jpg" alt="Image 3">
+        </a>
+         <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p9.jpg" alt="Image 3">
+             <a href="images/large/image3.jpg" data-lightbox="mygallery" data-title="Image 3 Title">
+            <img src="p10.jpg" alt="Image 3">
+        </a>
+        </a>
+        <!-- Add more images here -->
+    </div>
+</section>
+</section>
+
+    </section>
+
+    <!-- SCRIPTS -->
+    <script>
+        // MODAL & ENVELOPE AUDIO
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function playModalAudio() {
+            const audio = document.getElementById("modalAudio");
+            audio.play();
+        }
+
+        function pauseModalAudio() {
+            const audio = document.getElementById("modalAudio");
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target === modal) {
+                closeModal();
+                pauseModalAudio();
+            }
+        }
+    </script>
+</body>
+</html>
